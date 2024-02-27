@@ -23,16 +23,18 @@ function onEmojiClick(data) {
 	
 	let targetElement = this.querySelector(".emoji");
 
-	if(value == 'cell-button T')
-	{
-		moveElement(targetElement);
-		cellIndex++;
-		spTrackEvent("pass" + Math.round((cellIndex / (cells.length + 1)) * 100));
-	}
-	else 
-	{
-		fillCross(targetElement);
-		crossIndex++;
+	if (cellIndex < cells.length && crossIndex < crosses.length) {
+		if(value == 'cell-button T')
+		{
+			moveElement(targetElement);
+			cellIndex++;
+			spTrackEvent("pass" + Math.round((cellIndex / (cells.length + 1)) * 100));
+		}
+		else
+		{
+			fillCross(targetElement);
+			crossIndex++;
+		}
 	}
 	
 	this.onclick = null;
