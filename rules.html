@@ -1,0 +1,57 @@
+Для загрузки плейбла в рамках saygames-sdk нужно предоствить плейбл соотвествующий следующим требованиям
+1. Single-html страница до 5mb размера(лучше 4.95)
+2. У плейла во время загрузки должен показываться загрузочный экран(как примерм; логотип с прогресс баром)
+3. Нужны определения следующих функций
+spBoot - запуск плейбла
+spResumeGame, spPauseGame игру на паузу
+spSetVolume(volume: number) - выставление громкости звука
+4. Вызов редиретка должен осуществляться с помощью функции spClick(tag:string)
+5. Аналитика
+spTrackEvent("ready") - по завершению загрузки плейбла(после вызова spBoot)
+spTrackEvent("show") - когда будет показан первый кадр плейбла(после экрана загрузки)
+spTrackEvent('start') - при первом действии совершенном пользователем
+spTrackEvent('pass25'),spTrackEvent('pass50'),spTrackEvent('pass75'),spTrackEvent('complete') - по мере прохождения плейбла
+6. Не должно быть упоминаний mraid и других network-sdk 
+7. Не должно быть сторонних загрузок ресурсов
+ 
+8. В body должен быть прописан следующий дефолтный скрипт(вместо него в последующем будет подставлена обертка для сеток)
+<script type="text/javascript">
+    // SayPlayables Template
+    var spVars = {}; // spVars end
+    
+    var spUrlAndroid = "";
+    var spUrlIos = "";
+    var spNetwork = "";
+    
+    function spTrackEvent(event, extra) {
+        console.log("spTrackEvent", event, extra);
+    }
+    
+    function spStoreUrl() {
+        var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+        return isAndroid ? spUrlAndroid : spUrlIos;
+    }
+    
+    function spClick(place) {
+        window.open();
+        spTrackEvent("click", place);
+    }
+
+    function spBoot() {
+        
+    }
+    
+    function spStartGame() {
+        spBoot();
+    }
+    
+    function spInit() {
+        spStartGame();
+    }
+    
+    window.addEventListener("load", function () {
+        spInit();
+    });
+</script>
+9. Желательно иметь логотип, иконку и(или) название игры во время гемплея
+10. Желательно иметь игровую кнопку установки

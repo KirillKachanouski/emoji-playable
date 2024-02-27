@@ -1,5 +1,5 @@
 body {
-  background: transparent; /* Make it white if you need */
+  background: transparent;
   color: #fcbe24;
   padding: 0 24px;
   margin: 0;
@@ -12,35 +12,28 @@ body {
 }
 
 body {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  font-family: 'Comic Sans MS';
-}
-body {
-  background: #222;
+  --W: auto;
+  --H: auto;
+  background: #fff;
   color: rgba(5, 60, 100, 1);
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
-}
-
-body {
-  --W: auto;
-  --H: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: 'Comic Sans MS';
 }
 
 .calc {
-  height: 960px;
-  width: 540px;
-  background: #fff;
+  /* height: 960px; */
+  /* width: 540px; */
+  /* background: #fff; */
   position: relative;
-  border-radius: 8px;
-  box-shadow: -5px -5px 20px 5px rgba(255, 255, 255, 0.08),
-    5px 5px 20px 5px rgba(0, 0, 0, 0.5),
-    -1px -1px 0px 0px rgba(255, 255, 255, 0.2),
-    1px 1px 0px 0px rgba(0, 0, 0, 0.4);
+  /* border-radius: 8px; */
+  /* box-shadow: -5px -5px 20px 5px rgba(255, 255, 255, 0.08), */
+    /* 5px 5px 20px 5px rgba(0, 0, 0, 0.5); */
   /* background: linear-gradient(120deg, #464e55 0%, #292929 100%); */
 }
 
@@ -48,14 +41,12 @@ body {
   content: '';
   position: absolute;
   z-index: -1;
-  /* background: #fff; */
   display: block;
   width: calc(100% + 2px);
   height: calc(100% + 2px);
   margin: -1px;
   top: 0;
   border-radius: 8px;
-  /* background: linear-gradient(120deg, #4f6579 0%, #312e40 100%); */
 }
 
 .input {
@@ -122,10 +113,8 @@ body {
 
 .btns {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 100px 100px 100px 100px;
   height: 400px;
-  padding-left: 70px;
-  padding-right: 70px;
   box-sizing: border-box;
   justify-content: center;
 }
@@ -148,7 +137,7 @@ body {
   position: relative;
   top: 0;
   left: 0;
-  transition: top 1s, left 1s; /* Анимационные свойства */
+  transition: top 0.5s, left 0.5s;
 }
 
 img 
@@ -169,7 +158,6 @@ img
 {
 	width: 80px;
 	height:80px;
-	
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -211,13 +199,13 @@ img
 }
 
 @keyframes example {
-   0%   {transform:scale(0.3);}
-   100%  {transform:scale(1);}
+  0%   {transform:scale(0.3);}
+  100%  {transform:scale(1);}
 }
 
 
 .hiA{
-    animation: example 0.7s;
+  animation: example 0.7s;
 }
 
 .button-19 {
@@ -263,7 +251,6 @@ img
   right: 0;
   top: 0;
   z-index: -1;
-  
   filter: brightness(1.1);
   -webkit-filter: brightness(1.1);
 }
@@ -349,4 +336,26 @@ img
   left: 100%;
   animation-delay: -2.5s;
   background-color: #f9c4ea;
+}
+
+@media (max-width: 400px) {
+	.btns {
+	  grid-template-columns: 70px 70px 70px 70px;
+	  height: 280px;
+	}
+	
+	.cell-square {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(100, 100, 100, 0.3);
+    border-radius: 15px;
+	}
+	
+	.cell {
+    width: 55px;
+    height:55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	}
 }

@@ -1,21 +1,24 @@
 [...document.querySelectorAll('.cell-button')].forEach(function(el) {
-	el.onclick = ev;
+	el.onclick = onEmojiClick;
 })
 
 document.querySelectorAll('.button-19').forEach(function(el) {
-	el.onclick = leave;
+	el.onclick = spClick;
 })
 
 let cells = Array.from(document.querySelectorAll('.cell-square'));
 let crosses = Array.from(document.querySelectorAll('.icon'));
 let cellIndex = 0;
 let crossIndex = 0;
+let firstClick = false;
 
-function leave(data) {
-	window.location.href = 'https://play.google.com/store/apps/details?id=com.emojiguess.match';
-}
+function onEmojiClick(data) {
+	if (firstClick == false) 
+	{
+		firstClick = true;
+		spTrackEvent("start");
+	}
 
-function ev(data) {
 	let value = typeof data == 'string' ? data : this.attributes['class'].value;
 	
 	let targetElement = this.querySelector(".emoji");
@@ -24,10 +27,11 @@ function ev(data) {
 	{
 		moveElement(targetElement);
 		cellIndex++;
+		spTrackEvent("pass" + Math.round((cellIndex / (cells.length + 1)) * 100));
 	}
 	else 
 	{
-		setCross(targetElement);
+		fillCross(targetElement);
 		crossIndex++;
 	}
 	
@@ -61,7 +65,7 @@ function moveElement(targetElement)
 	targetElement.style.top = targetRect.top - sourceRect.top + 'px';
 }
 
-function setCross(targetElement) 
+function fillCross(targetElement) 
 {
 	targetElement.className="hiA"
 	targetElement.src = './img/cross.png';
@@ -75,3 +79,46 @@ function setCross(targetElement)
 	} 
 	, 1000);
 }
+
+// SayPlayables Template
+var spVars = {}; // spVars end
+
+var spUrlAndroid = "https://play.google.com/store/apps/details?id=com.emojiguess.match";
+var spUrlIos = "https://apps.apple.com/by/app/emoji-guess-puzzle-quiz-game/id1612619232";
+var spNetwork = "";
+
+function spTrackEvent(event, extra) {
+	console.log("spTrackEvent", event, extra);
+}
+
+function spStoreUrl() {
+	var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+	return isAndroid ? spUrlAndroid : spUrlIos;
+}
+
+function spClick(data) {
+	spTrackEvent("complete");
+	let place = cellIndex == cells.length ? "winScreen" : "loseScreen";
+	spTrackEvent("click", place);
+
+	window.open(spStoreUrl());
+}
+
+function spBoot() {
+
+}
+
+function spStartGame() {
+	spBoot();
+
+	spTrackEvent("ready");
+	spTrackEvent("show");
+}
+
+function spInit() {
+	spStartGame();
+}
+
+window.addEventListener("load", function () {
+	spInit();
+});
