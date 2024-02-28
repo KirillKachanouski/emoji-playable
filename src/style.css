@@ -19,7 +19,7 @@ body {
   display: flex;
   height: 100vh;
   justify-content: center;
-  align-items: center;
+  align-items: normal;
   padding: 0;
   margin: 0;
   border: 0;
@@ -50,7 +50,7 @@ body {
 }
 
 .input {
-  height: 370px;
+  height: 300px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -60,14 +60,14 @@ body {
 }
 
 .crosses {
-  height: 50px;
+  height: 80px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
   justify-content: center;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 }
 
 .icon {
